@@ -4,13 +4,14 @@ import React from 'react';
 
 const Comment = props => {
   const comment = props.comment;
-  const show = props.currentUser &&
+  const show = props.currentUser && comment.author &&
     props.currentUser.username === comment.author.username;
   return (
     <div className="card">
       <div className="card-block">
         <p className="card-text">{comment.body}</p>
       </div>
+      { comment.author && 
       <div className="card-footer">
         <Link
           to={`/@${comment.author.username}`}
@@ -28,6 +29,7 @@ const Comment = props => {
         </span>
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>
+      }
     </div>
   );
 };

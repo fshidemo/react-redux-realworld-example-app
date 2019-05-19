@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ArticlePreview = props => {
-  const article = props.article;
+  const article = props.article || {};
   const favoriteButtonClass = article.favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
@@ -36,19 +36,30 @@ const ArticlePreview = props => {
   return (
     <div className="article-preview">
       <div className="article-meta">
+        { article.author ?
         <Link to={`/@${article.author.username}`}>
           <img src={article.author.image} alt={article.author.username} />
         </Link>
-
+        : 
+        <div>
+          No author
+        </div>
+        }
+        
         <div className="info">
+          { article.author ?
           <Link className="author" to={`/@${article.author.username}`}>
             {article.author.username}
           </Link>
+          :
+          <div>
+            No author
+          </div>
+          }
           <span className="date">
             {new Date(article.createdAt).toDateString()}
           </span>
         </div>
-
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
             <i className="ion-heart"></i> {article.favoritesCount}

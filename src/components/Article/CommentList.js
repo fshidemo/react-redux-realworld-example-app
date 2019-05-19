@@ -7,7 +7,7 @@ const CommentList = props => {
       {
         props.comments.map(comment => {
           return (
-            <Comment
+            comment && <Comment
               comment={comment}
               currentUser={props.currentUser}
               slug={props.slug}
